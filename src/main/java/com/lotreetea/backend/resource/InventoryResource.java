@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import java.net.URI;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://csce331-project3-deploy-frontend.onrender.com/")
 // Allows cross-origin requests from front-end running on localhost:3000
 @RestController // Indicates this class handles REST endpoints.
 @RequestMapping("/inventory") // All endpoints will be prefixed with "/inventory".

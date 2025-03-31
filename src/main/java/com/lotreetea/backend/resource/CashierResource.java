@@ -24,7 +24,7 @@ import com.lotreetea.backend.service.CashierService;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://csce331-project3-deploy-frontend.onrender.com/")
 @RestController
 @RequestMapping("/cashiers")
 @RequiredArgsConstructor
