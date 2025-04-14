@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000") // Adjust to your frontend URL
+@CrossOrigin(origins = "https://csce331-project3-deploy-frontend.onrender.com") // Adjust to your frontend URL
 @RestController
 @RequestMapping("/orders")
 @RequiredArgsConstructor

@@ -19,7 +19,7 @@ import com.lotreetea.backend.service.MenuItemService;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins = "http://localhost:3000") // or your front-end URL
+@CrossOrigin(origins = "https://csce331-project3-deploy-frontend.onrender.com") // or your front-end URL
 @RestController
 @RequestMapping("/menu_items")
 @RequiredArgsConstructor
