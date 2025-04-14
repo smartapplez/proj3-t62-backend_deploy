@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: spring-backend
+    env: java
+    buildCommand: "./mvnw clean install"
+    startCommand: "./mvnw spring-boot:run"
+    plan: free
+    rootDir: backend
+    envVars:
+      - key: PORT
+        value: 10000  # You can also remove this if you're using System.getenv("PORT")

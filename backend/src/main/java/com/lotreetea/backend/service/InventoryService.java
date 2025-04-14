@@ -3,6 +3,8 @@ package com.lotreetea.backend.service;
 import com.lotreetea.backend.model.InventoryItem;
 import com.lotreetea.backend.repo.InventoryItemRepo;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -20,8 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 public class InventoryService {
     private final InventoryItemRepo inventoryRepo;
 
-    public Page<InventoryItem>getAllInventoryItems(int page, int size){
-        return inventoryRepo.findAll(PageRequest.of(page, size, Sort.by("itemName")));
+    public List<InventoryItem> getAllInventoryItems() {
+        return inventoryRepo.findAll(Sort.by("itemName"));
     }
 
     public InventoryItem getInventoryItem(Integer id){
@@ -32,7 +34,18 @@ public class InventoryService {
         return inventoryRepo.save(inventoryItem);
     }
 
-    public void deleteInventoryItem(InventoryItem inventoryItem) {
+    public InventoryItem updateInventoryItem(Integer id, InventoryItem updatedItem) {
+        InventoryItem existing = getInventoryItem(id);
+        existing.setItemName(updatedItem.getItemName());
+        existing.setDesiredQuantity(updatedItem.getDesiredQuantity());
+        existing.setStoredQuantity(updatedItem.getStoredQuantity());
+        existing.setUnit(updatedItem.getUnit());
+        existing.setCost(updatedItem.getCost());
+        return inventoryRepo.save(existing);
+    }
 
+    public void deleteInventoryItem(Integer id) {
+        InventoryItem item = getInventoryItem(id); // throws if not found
+        inventoryRepo.delete(item);
     }
 }

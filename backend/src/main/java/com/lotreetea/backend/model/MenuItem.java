@@ -2,8 +2,6 @@ package com.lotreetea.backend.model;
 
 import java.math.BigDecimal;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,20 +13,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "inventory_items")
+@Table(name = "menu_items")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class InventoryItem {
+public class MenuItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer inventoryItemId; // look into changing id to uuid ??
+    private Integer menuItemId;
 
     private String itemName;
-    private double desiredQuantity;
-    private double storedQuantity;
-    private String unit;
-    private BigDecimal cost;
+    private String category;
+    private BigDecimal price;
+    // Add more fields if they exist in your DB table
 }

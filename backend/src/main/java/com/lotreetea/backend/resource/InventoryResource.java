@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import java.net.URI;
 import java.util.List;
 
-@CrossOrigin(origins = "https://csce331-project3-deploy-frontend.onrender.com")
+@CrossOrigin(origins = "http://localhost:3000") // https://csce331-project3-deploy-frontend.onrender.com/
 // Allows cross-origin requests from front-end running on localhost:3000
 @RestController // Indicates this class handles REST endpoints.
 @RequestMapping("/inventory") // All endpoints will be prefixed with "/inventory".
@@ -23,14 +23,12 @@ public class InventoryResource {
     @PostMapping
     public ResponseEntity<InventoryItem> createInventory(@RequestBody InventoryItem inventory) {
         InventoryItem saved = inventoryService.createInventoryItem(inventory);
-        
         return ResponseEntity.created(URI.create("/inventory/" + saved.getInventoryItemId())).body(saved);
     }
 
     // READ ALL
     @GetMapping
-    public ResponseEntity<List<InventoryItem>> getAllInventories()
-        {
+    public ResponseEntity<List<InventoryItem>> getAllInventories(){
         List<InventoryItem> all = inventoryService.getAllInventoryItems();
         return ResponseEntity.ok(all);
     }
@@ -42,7 +40,20 @@ public class InventoryResource {
         return ResponseEntity.ok(item);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<InventoryItem> updateInventory(
+            @PathVariable Integer id,
+            @RequestBody InventoryItem updatedItem) {
+
+        InventoryItem updated = inventoryService.updateInventoryItem(id, updatedItem);
+        return ResponseEntity.ok(updated);
+    }
     
 
-   
+    // DELETE
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteInventory(@PathVariable Integer id) {
+        inventoryService.deleteInventoryItem(id);
+        return ResponseEntity.noContent().build();
+    }
 }
