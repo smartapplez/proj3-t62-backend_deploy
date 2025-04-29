@@ -4,17 +4,19 @@ import com.lotreetea.backend.model.InventoryItem;
 import com.lotreetea.backend.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 
 import java.net.URI;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000") // https://csce331-project3-deploy-frontend.onrender.com/
+//@CrossOrigin(origins = "http://localhost:3000")
 // Allows cross-origin requests from front-end running on localhost:3000
 @RestController // Indicates this class handles REST endpoints.
 @RequestMapping("/inventory") // All endpoints will be prefixed with "/inventory".
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('MANAGER')")
 public class InventoryResource {
 
     private final InventoryService inventoryService;
