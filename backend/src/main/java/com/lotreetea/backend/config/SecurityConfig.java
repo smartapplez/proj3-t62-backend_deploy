@@ -12,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -34,13 +35,16 @@ public class SecurityConfig {
     return http
         .csrf(AbstractHttpConfigurer::disable)
         .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+        
         .authorizeHttpRequests(auth -> {
           auth
+              .requestMatchers("/orders").permitAll()
+              .requestMatchers("/api/chat").permitAll()
               .requestMatchers("/api/whoami").permitAll()
               .requestMatchers("/api/logout").permitAll()
               .requestMatchers("/menu_items").permitAll()
               .requestMatchers("/order_items").permitAll()
-              .requestMatchers("/orders").permitAll()
+              
               .anyRequest().authenticated();
         })
         .oauth2Login(oath2 -> {
