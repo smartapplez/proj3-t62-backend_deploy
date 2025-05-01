@@ -15,18 +15,18 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer orderId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer orderId;
 
-    private LocalDate orderDate;
-    private LocalTime orderTime;
-    private BigDecimal totalAmount;
-    private Integer cashierId;
-    private Boolean isRefund;
+  private String orderDate;
+  private LocalTime orderTime;
+  private BigDecimal totalAmount;
+  private Integer cashierId;
+  private Boolean isRefund;
 
-    // Use JsonManagedReference here to forward serialize the orderItems list
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private List<OrderItem> orderItems;
+  // Use JsonManagedReference here to forward serialize the orderItems list
+  @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonManagedReference
+  private List<OrderItem> orderItems;
 }
